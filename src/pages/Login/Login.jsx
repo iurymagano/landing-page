@@ -19,8 +19,8 @@ export function Login() {
       className="bg-zinc-900 w-full h-[100vh] flex">
       <div className="flex w-full py-24">
 
-        <div className="flex-1 border-r-[1px] border-zinc-500 flex justify-center items-center">
-          <div className="flex flex-col w-2/5">
+        <div className="flex-1 border-r-[1px] border-zinc-500 flex justify-center items-center md:px-6">
+          <div className="flex flex-col w-2/5 md:w-full">
             <span className="text-4xl font-bold mb-10 text-zinc-200">{cadastro ? 'Crie sua conta' : 'Entrar com e-mail'}</span>
             <div className="flex flex-col">
               <div className="mb-3">
@@ -73,7 +73,7 @@ export function Login() {
           </div>
         </div>
 
-        <div className="flex-1 flex">
+        <div className="flex-1 flex md:hidden">
           <div className="flex flex-col w-full justify-center items-center">
             <span className="text-3xl font-bold text-zinc-100">Venha conhecer meu mundo</span>
             <strong className="text-xl mt-4 text-zinc-500">Cadastre-se para ter acesso ao meu portfólio!</strong>
