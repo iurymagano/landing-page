@@ -80,7 +80,7 @@ export function Login(props) {
             {cadastro == false ?
               <>
                 <div className="flex flex-col">
-                  <span className="text-4xl font-bold mb-10 text-zinc-200">Entrar com e-mail</span>
+                  <span className="text-4xl font-bold mb-10 text-zinc-200">Entrar com e-mail teste</span>
                   {usuarioNecontrado && 
                   
                   <Alert
