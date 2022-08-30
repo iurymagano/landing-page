@@ -46,13 +46,10 @@ export function Login(props) {
 
   function verificaUsuario() {
     console.log('ESTA NA FUNÇÃO VERIFICAR')
-    const usuarioVerificado = usuarios.filter((usuario) =>
+    const usuarioVerificado = usuarios.some((usuario) =>
       usuario.email === email && usuario.password === password
     )
-    console.log('usuario verificado ' + JSON.stringify(usuarioVerificado.nome))
     if (usuarioVerificado) {
-      localStorage.setItem('USUARIO', JSON.stringify(usuarioVerificado))
-      console.log(localStorage.getItem('USUARIO'))
      props.usuarioLogado(true);
     } else {
       setUsuarioNencontrado(true);
