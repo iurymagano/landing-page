@@ -1,5 +1,11 @@
+import { BaseLayout } from "../../components/BaseLayout/BaseLayout";
+
 export function Main() {
   
 
-  return
+  return(
+    <BaseLayout>
+    
+    </BaseLayout>
+  );
 }

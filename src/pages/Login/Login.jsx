@@ -3,7 +3,7 @@ import Input from "../../components/Input/Input";
 import imgC from '../../assets/imgPrinc.svg'
 import { useEffect, useState } from "react";
 
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { initializeApp } from 'firebase/app'
 import { addDoc, collection, deleteDoc, getDocs, getFirestore } from 'firebase/firestore'
@@ -23,13 +23,13 @@ const firebaseApp = initializeApp({
 
 export function Login(props) {
   const [email, setEmail] = useState('');
-  const [nome, setNome] = useState('');
   const [password, setPassword] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [cadastro, setCadastro] = useState(false);
   const [usuarios, setUsuarios] = useState([]);
   const [usuarioNecontrado, setUsuarioNencontrado] = useState(false);
 
+  const navigate = useNavigate();
 
   const db = getFirestore(firebaseApp);
   //pegando a tabela do banco de dados
@@ -45,14 +45,15 @@ export function Login(props) {
   }, [])
 
   function verificaUsuario() {
-
-    const usuarioVerificado = usuarios.some((usuario) =>
+    console.log('ESTA NA FUNÇÃO VERIFICAR')
+    const usuarioVerificado = usuarios.filter((usuario) =>
       usuario.email === email && usuario.password === password
     )
-    // console.log(usuarioVerificado)
+    console.log('usuario verificado ' + JSON.stringify(usuarioVerificado.nome))
     if (usuarioVerificado) {
-        props.usuarioLogado(true);
-        console.log('demoro?')
+      localStorage.setItem('USUARIO', JSON.stringify(usuarioVerificado))
+      console.log(localStorage.getItem('USUARIO'))
+     props.usuarioLogado(true);
     } else {
       setUsuarioNencontrado(true);
       setMensagem('Verificar Usuario e senha')
@@ -70,6 +71,8 @@ export function Login(props) {
     await deleteDoc(userDoc);
   }
 
+
+
   return (
     <div
       className="bg-zinc-900 w-full h-[100vh] flex">
@@ -80,14 +83,14 @@ export function Login(props) {
             {cadastro == false ?
               <>
                 <div className="flex flex-col">
-                  <span className="text-4xl font-bold mb-10 text-zinc-200">Entrar com e-mail teste</span>
-                  {usuarioNecontrado && 
-                  
-                  <Alert
-                    className="text-white rounded-lg h-12 flex justify-center items-center mb-9"
-                    label={mensagem}
-                    erro={true}
-                  />
+                  <span className="text-4xl font-bold mb-10 text-zinc-200">Entrar com e-mail </span>
+                  {usuarioNecontrado &&
+
+                    <Alert
+                      className="text-white rounded-lg h-12 flex justify-center items-center mb-9"
+                      label={mensagem}
+                      erro={true}
+                    />
                   }
                   <div className="mb-3">
                     <Input
@@ -108,16 +111,12 @@ export function Login(props) {
                   />
 
                   <div className="w-full flex justify-center mt-6">
-                    <Link
-                      to='/home'>
-                      <Button
-                        label='Entrar'
-                        default
-                        onClick={() => verificaUsuario()}
 
-                      />
-                    </Link>
-
+                    <Button
+                      label='Entrar'
+                      default
+                      onClick={() => verificaUsuario()}
+                    />
                   </div>
                   {!cadastro &&
                     <div className="w-full flex items-center mt-8">
