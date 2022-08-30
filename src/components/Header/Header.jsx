@@ -7,7 +7,7 @@ export function Header() {
       <div className="max-w-5xl my-0 mx-auto flex items-center">
         <img className='w-12 h-12' src={logo} />
         <div className='font-semibold mx-auto flex gap-5'>
-          <Link to="/">Home</Link>
+          <Link to="/">Inicio</Link>
           <Link to="/">Home</Link>
         </div>
         

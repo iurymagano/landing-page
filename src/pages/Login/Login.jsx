@@ -59,7 +59,7 @@ export function Login(props) {
 
   const hanleCadastrar = async (usuario) => {
     const user = await addDoc(usuarioColection, usuario);
-
+    setUsuarios([...usuarios, usuario])
     setCadastro(false);
   }
 

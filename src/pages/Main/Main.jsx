@@ -5,7 +5,7 @@ export function Main() {
 
   return(
     <BaseLayout>
-    
+      <h1>Seja bem-vindo!</h1>
     </BaseLayout>
   );
 }
