@@ -1,7 +1,7 @@
 import { Button } from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import imgC from '../../assets/imgPrinc.svg'
-import { useEffect, useState } from "react";
+import {  useContext, useEffect, useState } from "react";
 
 import { useNavigate } from 'react-router-dom'
 
@@ -9,6 +9,7 @@ import { initializeApp } from 'firebase/app'
 import { addDoc, collection, deleteDoc, getDocs, getFirestore } from 'firebase/firestore'
 import { CadastroForm } from "./components/CadastroForm";
 import { Alert } from "../../components/Alert/Alert";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyBX2sHAb9WBqlxGR4dUWy-b4CH8LL5HvXg",
@@ -22,13 +23,14 @@ const firebaseApp = initializeApp({
 
 
 export function Login(props) {
+  const { usuario, setUsuario } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [cadastro, setCadastro] = useState(false);
   const [usuarios, setUsuarios] = useState([]);
   const [usuarioNecontrado, setUsuarioNencontrado] = useState(false);
-
+  
   const navigate = useNavigate();
 
   const db = getFirestore(firebaseApp);
@@ -44,19 +46,23 @@ export function Login(props) {
     getUsuarios();
   }, [])
 
+  
+  
   function verificaUsuario() {
-    console.log('ESTA NA FUNÇÃO VERIFICAR')
-    const usuarioVerificado = usuarios.some((usuario) =>
-      usuario.email === email && usuario.password === password
+    const usuarioVerificado = usuarios.filter((usuario) =>
+    usuario.email === email && usuario.password === password
     )
+    
     if (usuarioVerificado) {
-     props.usuarioLogado(true);
+      setUsuario(usuarioVerificado[0])
+      localStorage.setItem('user-token', usuarioVerificado[0].email)
+      
     } else {
       setUsuarioNencontrado(true);
       setMensagem('Verificar Usuario e senha')
     }
+    navigate('/home')
   }
-
   const hanleCadastrar = async (usuario) => {
     const user = await addDoc(usuarioColection, usuario);
     setUsuarios([...usuarios, usuario])
@@ -80,7 +86,7 @@ export function Login(props) {
             {cadastro == false ?
               <>
                 <div className="flex flex-col">
-                  <span className="text-4xl font-bold mb-10 text-zinc-200">Entrar com e-mail </span>
+                  <span className="text-4xl font-bold mb-10 text-zinc-200">Login</span>
                   {usuarioNecontrado &&
 
                     <Alert
@@ -155,3 +161,4 @@ export function Login(props) {
 
   );
 }
+
