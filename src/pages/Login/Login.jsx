@@ -45,23 +45,21 @@ export function Login(props) {
     }
     getUsuarios();
   }, [])
-
-  
   
   function verificaUsuario() {
     const usuarioVerificado = usuarios.filter((usuario) =>
     usuario.email === email && usuario.password === password
     )
     
-    if (usuarioVerificado) {
+    if (usuarioVerificado[0]) {
       setUsuario(usuarioVerificado[0])
       localStorage.setItem('user-token', usuarioVerificado[0].email)
+      navigate('/home')
       
     } else {
       setUsuarioNencontrado(true);
       setMensagem('Verificar Usuario e senha')
     }
-    navigate('/home')
   }
   const hanleCadastrar = async (usuario) => {
     const user = await addDoc(usuarioColection, usuario);
