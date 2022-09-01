@@ -16,7 +16,7 @@ function logout() {
       <div className="max-w-5xl my-0 mx-auto flex items-center">
         <img className='w-12 h-12' src={logo} />
         <div className='font-semibold mx-auto flex gap-5 items-center'>
-          <Link to="/">Inicio</Link>
+         
           <Button 
             className="bg-blue-500 px-6 py-2 rounded-lg hover:bg-blue-700"
             label="Sair"
