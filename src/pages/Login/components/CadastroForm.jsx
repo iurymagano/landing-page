@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Alert } from "../../../components/Alert/Alert";
 import { Button } from "../../../components/Button/Button";
 import Input from "../../../components/Input/Input";
-import { Login } from "../Login";
 
 export const CadastroForm = (props) => {
   const [usuarios, setUsuarios] = useState(props.usuarios);
@@ -52,23 +51,22 @@ export const CadastroForm = (props) => {
       }
       <div className="mb-3">
         <Input
-          label="Email"
-          type="text"
-          placeholder="E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          erro={erro && !email ? true : false}
-        />
-      </div>
-
-      <div className="mb-3">
-        <Input
           label="Nome"
           type="text"
           placeholder="Nome"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
           erro={erro && !nome ? true : false}
+        />
+      </div>
+      <div className="mb-3">
+        <Input
+          label="Email"
+          type="text"
+          placeholder="E-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          erro={erro && !email ? true : false}
         />
       </div>
 
@@ -86,7 +84,6 @@ export const CadastroForm = (props) => {
           label='Criar conta'
           default
           onClick={() => criarUsuario()}
-
         />
       </div>
       <div className="w-full flex  flex-col items-center mt-4 gap-4">

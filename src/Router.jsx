@@ -8,7 +8,7 @@ import { AuthContext } from './Contexts/AuthContext';
 
 function Private({ Item }) {
   const { usuario } = useContext(AuthContext);
-  return localStorage.getItem('user-token') && usuario.email ? <Item /> : <Login />}
+  return localStorage.getItem('user-token').length > 0 ? <Item /> : <Login />}
 
 export const Router = () => {
  
@@ -16,7 +16,7 @@ export const Router = () => {
     <BrowserRouter>
       <Fragment>
           <Routes>
-            <Route path='/home' element={<Private Item={Main} />} />
+            <Route path='/' element={<Private Item={Main} />} />
             <Route path='/' element={<Login />} />
             <Route exact path='/login' element={<Login />} />
             <Route path='*' element={<Login />} />

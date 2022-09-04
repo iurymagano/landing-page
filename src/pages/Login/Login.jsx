@@ -53,8 +53,8 @@ export function Login(props) {
     
     if (usuarioVerificado[0]) {
       setUsuario(usuarioVerificado[0])
-      localStorage.setItem('user-token', usuarioVerificado[0].email)
-      navigate('/home')
+      localStorage.setItem('user-token', JSON.stringify(usuarioVerificado[0]))
+      navigate('/')
       
     } else {
       setUsuarioNencontrado(true);
@@ -72,21 +72,16 @@ export function Login(props) {
     await deleteDoc(userDoc);
   }
 
-
-
   return (
-    <div
-      className="bg-zinc-900 w-full h-[100vh] flex">
+    <div className="bg-zinc-900 w-full h-[100vh] flex">
       <div className="flex w-full py-24">
         <div className="flex-1 border-r-[1px] border-zinc-500 flex justify-center items-center md:px-6">
-
           <div className="flex flex-col w-2/5 md:w-full">
             {cadastro == false ?
               <>
                 <div className="flex flex-col">
                   <span className="text-4xl font-bold mb-10 text-zinc-200">Login</span>
                   {usuarioNecontrado &&
-
                     <Alert
                       className="text-white rounded-lg h-12 flex justify-center items-center mb-9"
                       label={mensagem}
@@ -112,7 +107,6 @@ export function Login(props) {
                   />
 
                   <div className="w-full flex justify-center mt-6">
-
                     <Button
                       label='Entrar'
                       default
@@ -144,7 +138,7 @@ export function Login(props) {
               />}
 
           </div>
-        </div>
+        </div>  
 
         <div className="flex-1 flex md:hidden">
           <div className="flex flex-col w-full justify-center items-center">

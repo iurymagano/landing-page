@@ -23,6 +23,9 @@ module.exports = {
       // => @media (max-width: 639px)
       }
     },
+    color: {
+      'fundo': '#140523',
+    }
   },
   plugins: [],
 }
