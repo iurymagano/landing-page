@@ -6,6 +6,8 @@ import { Button } from '../Button/Button';
 export function Header() {
   const navigate = useNavigate();
 
+  console.log("TESTE HEADER")
+
   function logout() {
     localStorage.removeItem('user-token');
     navigate('/')

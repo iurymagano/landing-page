@@ -54,7 +54,7 @@ export function Login(props) {
     if (usuarioVerificado[0]) {
       setUsuario(usuarioVerificado[0])
       localStorage.setItem('user-token', JSON.stringify(usuarioVerificado[0]))
-      navigate('/')
+      navigate('/in')
       
     } else {
       setUsuarioNencontrado(true);

@@ -16,10 +16,9 @@ export const Router = () => {
     <BrowserRouter>
       <Fragment>
           <Routes>
-            <Route path='/' element={<Private Item={Main} />} />
+            <Route path='/in' element={<Private Item={Main} />} />
             <Route path='/' element={<Login />} />
             <Route exact path='/login' element={<Login />} />
-            <Route path='*' element={<Login />} />
           </Routes>
       </Fragment>
     </BrowserRouter>

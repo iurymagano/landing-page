@@ -4,9 +4,9 @@ import { Menu } from '../Menu/Menu'
 export function BaseLayout(props) {
   return (
     <>
-      <div className='flex'>
+      <div className='flex bg-[#242526] gap-4'>
        <Menu />
-          <div className="menu">{props.children}</div>
+          <div className="w-full h-full">{props.children}</div>
       </div>
 
 

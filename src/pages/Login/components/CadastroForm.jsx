@@ -9,9 +9,11 @@ export const CadastroForm = (props) => {
   const [email, setEmail] = useState('');
   const [nome, setNome] = useState('');
   const [password, setPassword] = useState('');
-  const [erro, setErro] = useState(false);
+  const [confirm, setConfirm] = useState('');
   const [mensagem, setMensagem] = useState('');
+  const [erro, setErro] = useState(false);
   const [contaCriada, setContaCriada] = useState(false);
+
 
   const user = {
     email,
@@ -23,19 +25,26 @@ export const CadastroForm = (props) => {
    const emailUsuarioExiste = usuarios.some(user => {
     return user.email == email;
    })
-    if(!emailUsuarioExiste) {
-      if (email && nome && password) {
-        props.hanleCadastrar(user);
-        setMensagem('Conta criada com sucesso');
-        setContaCriada(true);
+
+    if (password === confirm) {
+
+      if(!emailUsuarioExiste) {
+        if (email && nome && password) {
+          props.hanleCadastrar(user);
+          setMensagem('Conta criada com sucesso');
+          setContaCriada(true);
+        } else {
+          setMensagem('Preencha os campos obrigatórios')
+        }
+        
       } else {
-        setMensagem('Preencha os campos obrigatórios')
+        setMensagem('Conta com email já existente')
       }
-      
     } else {
-      setMensagem('Conta com email já existente')
+      setErro(true)
+      setMensagem('A senha não é a mesma da confirmação')
     }
-    setErro(true);
+      setErro(true);
   }
 
   return (
@@ -69,6 +78,7 @@ export const CadastroForm = (props) => {
           erro={erro && !email ? true : false}
         />
       </div>
+      <div className="mb-3">
 
       <Input
         label="Senha"
@@ -76,7 +86,16 @@ export const CadastroForm = (props) => {
         placeholder="Senha"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        erro={erro && !password ? true : false}
+        erro={erro && !password || erro && password !== confirm ? true : false}
+        />
+        </div>
+      <Input
+        label="Confirme sua senha "
+        type="password"
+        placeholder="Confirme sua senha"
+        value={confirm}
+        onChange={(e) => setConfirm(e.target.value)}
+        erro={erro && !confirm || erro && password !== confirm  ? true : false}
       />
 
       <div className="w-full flex justify-center mt-6">
